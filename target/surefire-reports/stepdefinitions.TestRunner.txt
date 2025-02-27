@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: stepdefinitions.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 11.07 s <<< FAILURE! -- in stepdefinitions.TestRunner
+Google Search Functionality.Search for a valid keyword on Google -- Time elapsed: 5.848 s <<< ERROR!
+org.openqa.selenium.remote.http.ConnectionFailedException: 
+Unable to establish websocket connection to http://localhost:50384/devtools/browser/1538a065-d172-4862-a909-e794fd9e7218
+Build info: version: '4.5.0', revision: 'fe167b119a'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '14.2.1', java.version: '23.0.2'
+Driver info: driver.version: ChromeDriver
+	at org.openqa.selenium.remote.http.netty.NettyWebSocket.<init>(NettyWebSocket.java:102)
+	at org.openqa.selenium.remote.http.netty.NettyWebSocket.lambda$create$3(NettyWebSocket.java:128)
+	at org.openqa.selenium.remote.http.netty.NettyClient.openSocket(NettyClient.java:107)
+	at org.openqa.selenium.devtools.Connection.<init>(Connection.java:77)
+	at org.openqa.selenium.chromium.ChromiumDriver.lambda$new$2(ChromiumDriver.java:116)
+	at java.base/java.util.Optional.map(Optional.java:260)
+	at org.openqa.selenium.chromium.ChromiumDriver.<init>(ChromiumDriver.java:114)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:81)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:70)
+	at stepdefinitions.GoogleSearchSteps.the_user_is_on_the_google_homepage(GoogleSearchSteps.java:25)
+	at ✽.the user is on the Google homepage(file:///Users/shalini/Documents/Projects/automation-project/src/test/resources/features/GoogleSearch.feature:4)
+
+Google Search Functionality.Search for a random string that has no results -- Time elapsed: 4.297 s <<< ERROR!
+org.openqa.selenium.remote.http.ConnectionFailedException: 
+Unable to establish websocket connection to http://localhost:50398/devtools/browser/b0e4dcca-4259-40ed-a6f4-bd6a12777e20
+Build info: version: '4.5.0', revision: 'fe167b119a'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '14.2.1', java.version: '23.0.2'
+Driver info: driver.version: ChromeDriver
+	at org.openqa.selenium.remote.http.netty.NettyWebSocket.<init>(NettyWebSocket.java:102)
+	at org.openqa.selenium.remote.http.netty.NettyWebSocket.lambda$create$3(NettyWebSocket.java:128)
+	at org.openqa.selenium.remote.http.netty.NettyClient.openSocket(NettyClient.java:107)
+	at org.openqa.selenium.devtools.Connection.<init>(Connection.java:77)
+	at org.openqa.selenium.chromium.ChromiumDriver.lambda$new$2(ChromiumDriver.java:116)
+	at java.base/java.util.Optional.map(Optional.java:260)
+	at org.openqa.selenium.chromium.ChromiumDriver.<init>(ChromiumDriver.java:114)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:81)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:70)
+	at stepdefinitions.GoogleSearchSteps.the_user_is_on_the_google_homepage(GoogleSearchSteps.java:25)
+	at ✽.the user is on the Google homepage(file:///Users/shalini/Documents/Projects/automation-project/src/test/resources/features/GoogleSearch.feature:9)
+

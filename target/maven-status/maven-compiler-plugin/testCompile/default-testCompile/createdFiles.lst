@@ -1,1 +1,2 @@
-com/shalini/automation/AppTest.class
+stepdefinitions/GoogleSearchSteps.class
+stepdefinitions/TestRunner.class

@@ -1,0 +1,64 @@
+name: Validate Automation Scripts Against JIRA
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Extract JIRA key from PR title/description
+        id: extract_jira
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_BODY="${{ github.event.pull_request.body }}"
+          JIRA_KEY=$(echo "$PR_TITLE $PR_BODY" | grep -oE 'JIRA-[0-9]+' | head -n 1)
+          if [[ -z "$JIRA_KEY" ]]; then
+            echo "❌ No JIRA key found in PR title or description."
+            exit 1
+          fi
+          echo "✅ Found JIRA Key: $JIRA_KEY"
+          echo "JIRA_KEY=$JIRA_KEY" >> $GITHUB_ENV
+
+      - name: Fetch JIRA Acceptance Criteria
+        id: fetch_jira
+        run: |
+          JIRA_API_URL="https://your-jira-instance.atlassian.net/rest/api/3/issue/${{ env.JIRA_KEY }}"
+          RESPONSE=$(curl -u "your-email@example.com:your-jira-api-token" -X GET -H "Content-Type: application/json" "$JIRA_API_URL")
+          ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.customfield_12345') # Replace with actual field ID
+          if [[ -z "$ACCEPTANCE_CRITERIA" ]]; then
+            echo "❌ No acceptance criteria found in JIRA ticket."
+            exit 1
+          fi
+          echo "✅ Fetched Acceptance Criteria."
+          echo "ACCEPTANCE_CRITERIA=$ACCEPTANCE_CRITERIA" >> $GITHUB_ENV
+
+      - name: Fetch Changed Files in PR
+        id: fetch_files
+        run: |
+          CHANGED_FILES=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" | jq -r '.[].filename')
+          if [[ -z "$CHANGED_FILES" ]]; then
+            echo "❌ No changed files found in PR."
+            exit 1
+          fi
+          echo "✅ Found changed files: $CHANGED_FILES"
+          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+
+      - name: Run AI Validation on Test Scripts
+        id: ai_validation
+        run: |
+          pip install openai
+          python validate_tests.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.CHANGED_FILES }}"
+
+      - name: Fail Build if AI Validation Fails
+        if: failure()
+        run: |
+          echo "❌ Automation script does not fully validate acceptance criteria."
+          exit 1
+
