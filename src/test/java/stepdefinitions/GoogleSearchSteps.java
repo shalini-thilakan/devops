@@ -22,6 +22,7 @@ public class GoogleSearchSteps {
         options.addArguments("--headless"); // Run Chrome in headless mode
         options.addArguments("--disable-gpu");
 
+        // launching chrome driver
         driver = new ChromeDriver(options);
         driver.get("https://www.google.com");
     }
