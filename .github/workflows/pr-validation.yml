@@ -63,7 +63,7 @@ jobs:
         id: ai_validation
         run: |
           pip install openai
-          python validate_tests.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.CHANGED_FILES }}"
+          python validate_automation_scripts.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.CHANGED_FILES }}"
 
       - name: Fail Build if AI Validation Fails
         if: failure()
