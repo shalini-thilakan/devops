@@ -6,7 +6,7 @@ ACCEPTANCE_CRITERIA = sys.argv[1]
 FEATURE_FILES = sys.argv[2].split("\n")
 STEP_DEF_FILES = sys.argv[3].split("\n")
 
-GPT_MODEL = "gpt-4o"
+GPT_MODEL = "gpt-3.5-turbo"
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
