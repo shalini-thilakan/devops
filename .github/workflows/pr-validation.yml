@@ -105,7 +105,6 @@ jobs:
       - name: Run AI Validation on Test Scripts
         id: ai_validation
         run: |
-          pip install transformers
           python validate_automation_scripts_HF.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}"
 
       - name: Fail Build if AI Validation Fails

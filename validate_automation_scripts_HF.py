@@ -85,7 +85,24 @@ print("\n🔹 AI VALIDATION RESULT 🔹")
 print(validation_result)
 print("\n----------------------------------\n")
 
-if "no" in validation_result.lower():
+RESULT_CLASSIFICATION_PROMPT = f"""
+Classify the following response as "Positive" or "Negative" based on whether the automation script fully covers the acceptance criteria:
+
+Response:
+{validation_result}
+
+Only return "Positive" or "Negative".
+"""
+
+clsfn_inputs = tokenizer(RESULT_CLASSIFICATION_PROMPT, return_tensors="pt")
+clsfn_outputs = model.generate(**clsfn_inputs, max_length=100)
+classification = tokenizer.decode(clsfn_outputs[0], skip_special_tokens=True)
+
+print("\n🔹 CLASSIFICATION 🔹")
+print(classification)
+print("\n----------------------------------\n")
+
+if "negative" in classification.lower():
     print("❌ Automation test coverage is incomplete.")
     sys.exit(1)
 else:
