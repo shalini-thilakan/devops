@@ -54,9 +54,23 @@ print("Model loaded successfully!")
 #validation_pipeline = pipeline("text-generation", model)
 
 # AI Validation using Hugging Face model
-validation_prompt = f"Given the following acceptance criteria, check if the provided BDD automation scripts fully cover them.
-    If any criteria are missing, list them.:\nAcceptance Criteria in JSON format : {ACCEPTANCE_CRITERIA}\n\nDoes the following test automation fully cover the criteria?\nFeature Files:\n{feature_text}\n\nStep Definitions:\n{step_def_text}.\n\nRespond with a detailed analysis of the coverage.
-    "
+validation_prompt = f"""Given the following acceptance criteria, check if the provided BDD automation scripts fully cover them.
+If any criteria are missing, list them.
+
+Acceptance Criteria in JSON format:
+{ACCEPTANCE_CRITERIA}
+
+Does the following test automation fully cover the criteria?
+
+🔹 Feature Files:
+{feature_text}
+
+🔹 Step Definitions:
+{step_def_text}
+
+Respond with a detailed analysis of the coverage.
+"""
+
 #validation_result = validation_pipeline(validation_prompt, max_new_tokens=200)[0]['generated_text']
 
 # Tokenize input
