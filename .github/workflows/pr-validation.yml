@@ -47,30 +47,10 @@ jobs:
           echo "✅ Fetched Acceptance Criteria."
           echo "$ACCEPTANCE_CRITERIA"
 
-          # Call OpenAI to extract only the acceptance criteria from JSON
-          FORMATTED_ACCEPTANCE_CRITERIA=$(curl -X POST "https://api.openai.com/v1/chat/completions" \
-            -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "model": "gpt-4-turbo",
-              "messages": [
-                {"role": "system", "content": "Extract and return only the acceptance criteria as plain text."},
-                {"role": "user", "content": "'"$ACCEPTANCE_CRITERIA"'"}
-              ]
-            }' | jq -r '.choices[0].message.content')
-
-          if [[ -z "$FORMATTED_ACCEPTANCE_CRITERIA" ]]; then
-            echo "❌ Failed to extract acceptance criteria."
-            exit 1
-          fi
-
-          echo "✅ Formatted Acceptance Criteria."
-          echo "$FORMATTED_ACCEPTANCE_CRITERIA"
-
 
           # Store in GitHub Actions Environment Variable safely
-          echo "FORMATTED_ACCEPTANCE_CRITERIA<<EOF" >> $GITHUB_ENV
-          echo "$FORMATTED_ACCEPTANCE_CRITERIA" >> $GITHUB_ENV
+          echo "ACCEPTANCE_CRITERIA<<EOF" >> $GITHUB_ENV
+          echo "$ACCEPTANCE_CRITERIA" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Search for Feature Files and Step Definitions
@@ -106,7 +86,7 @@ jobs:
         id: ai_validation
         run: |
           pip install openai
-          python validate_automation_scripts.py "${{ env.FORMATTED_ACCEPTANCE_CRITERIA }}" "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}"
+          python validate_automation_scripts.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}"
 
       - name: Fail Build if AI Validation Fails
         if: failure()
