@@ -26,7 +26,7 @@ jobs:
         run: |
           PR_TITLE="${{ github.event.pull_request.title }}"
           PR_BODY="${{ github.event.pull_request.body }}"
-          JIRA_KEY=$(echo "$PR_TITLE $PR_BODY" | grep -oE 'JIRA-[0-9]+' | head -n 1)
+          JIRA_KEY=$(echo "$PR_TITLE $PR_BODY" | grep -oE '[A-Z]+-[0-9]+' | head -n 1)
           if [[ -z "$JIRA_KEY" ]]; then
             echo "❌ No JIRA key found in PR title or description."
             exit 1
@@ -37,9 +37,9 @@ jobs:
       - name: Fetch JIRA Acceptance Criteria
         id: fetch_jira
         run: |
-          JIRA_API_URL="https://your-jira-instance.atlassian.net/rest/api/3/issue/${{ env.JIRA_KEY }}"
-          RESPONSE=$(curl -u "your-email@example.com:your-jira-api-token" -X GET -H "Content-Type: application/json" "$JIRA_API_URL")
-          ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.customfield_12345') # Replace with actual field ID
+          JIRA_API_URL="https://shalinithilakan.atlassian.net/rest/api/3/issue/${{ env.JIRA_KEY }}"
+          RESPONSE=$(curl -u "${{ secrets.JIRA_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" -X GET -H "Content-Type: application/json" "$JIRA_API_URL")
+          ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.description') # Replace with actual field ID
           if [[ -z "$ACCEPTANCE_CRITERIA" ]]; then
             echo "❌ No acceptance criteria found in JIRA ticket."
             exit 1
