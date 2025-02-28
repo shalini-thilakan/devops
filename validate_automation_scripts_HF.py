@@ -95,7 +95,7 @@ Only return "Positive" or "Negative".
 """
 
 clsfn_inputs = tokenizer(RESULT_CLASSIFICATION_PROMPT, return_tensors="pt")
-clsfn_outputs = model.generate(**clsfn_inputs, max_length=100)
+clsfn_outputs = model.generate(**clsfn_inputs, max_new_tokens=100)
 classification = tokenizer.decode(clsfn_outputs[0], skip_special_tokens=True)
 
 print("\n🔹 CLASSIFICATION 🔹")
