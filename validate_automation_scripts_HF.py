@@ -6,7 +6,7 @@ ACCEPTANCE_CRITERIA = sys.argv[1]
 FEATURE_FILES = sys.argv[2].split("\n")
 STEP_DEF_FILES = sys.argv[3].split("\n")
 
-EXTRACTION_MODEL = "mistralai/Mistral-7B-Instruct"
+EXTRACTION_MODEL = "mistralai/Mistral-7B-v0.1"
 VALIDATION_MODEL = "bigcode/starcoder"
 
 def read_file_content(file_paths):
