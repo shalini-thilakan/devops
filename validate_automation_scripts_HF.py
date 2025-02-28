@@ -45,8 +45,8 @@ feature_text = read_file_content(FEATURE_FILES)
 step_def_text = read_file_content(STEP_DEF_FILES)
 
 # Load tokenizer & model without downloading everything
-tokenizer = AutoTokenizer.from_pretrained({VALIDATION_MODEL}, trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained({VALIDATION_MODEL}, device_map="auto", trust_remote_code=True)
+tokenizer = AutoTokenizer.from_pretrained(VALIDATION_MODEL, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(VALIDATION_MODEL, device_map="auto", trust_remote_code=True)
 
 print("Model loaded successfully!")
 
