@@ -9,7 +9,7 @@ FEATURE_FILES = sys.argv[2].split("\n")
 STEP_DEF_FILES = sys.argv[3].split("\n")
 
 EXTRACTION_MODEL = "mistralai/Mistral-7B-v0.1"
-VALIDATION_MODEL = "deepseek-ai/deepseek-coder-1.3b-instruct"
+VALIDATION_MODEL = "codellama/CodeLlama-13b-Instruct-hf"
 
 def read_file_content(file_paths):
     content = ""
