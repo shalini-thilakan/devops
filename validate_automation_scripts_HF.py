@@ -1,13 +1,15 @@
 import sys
 import os
 from transformers import pipeline
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
 
 ACCEPTANCE_CRITERIA = sys.argv[1]
 FEATURE_FILES = sys.argv[2].split("\n")
 STEP_DEF_FILES = sys.argv[3].split("\n")
 
 EXTRACTION_MODEL = "mistralai/Mistral-7B-v0.1"
-VALIDATION_MODEL = "bigcode/starcoder"
+VALIDATION_MODEL = "deepseek-ai/deepseek-coder-1.3b-instruct"
 
 def read_file_content(file_paths):
     content = ""
@@ -42,13 +44,28 @@ print("\n----------------------------------\n")
 feature_text = read_file_content(FEATURE_FILES)
 step_def_text = read_file_content(STEP_DEF_FILES)
 
+# Load tokenizer & model without downloading everything
+tokenizer = AutoTokenizer.from_pretrained({VALIDATION_MODEL}, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained({VALIDATION_MODEL}, device_map="auto", trust_remote_code=True)
+
+print("Model loaded successfully!")
+
 # Load a model for validation (e.g., `bigcode/starcoder` for code analysis)
-validation_pipeline = pipeline("text-generation", model=f"{VALIDATION_MODEL}")
+#validation_pipeline = pipeline("text-generation", model)
 
 # AI Validation using Hugging Face model
-validation_prompt = f"You are an expert in BDD test automation. Here are the acceptance criteria:\n{ACCEPTANCE_CRITERIA}\n\nDoes the following test automation fully cover the criteria?\nFeature Files:\n{feature_text}\n\nStep Definitions:\n{step_def_text}"
-validation_result = validation_pipeline(validation_prompt, max_new_tokens=200)[0]['generated_text']
+validation_prompt = f"Given the following acceptance criteria, check if the provided BDD automation scripts fully cover them.
+    If any criteria are missing, list them.:\nAcceptance Criteria in JSON format : {ACCEPTANCE_CRITERIA}\n\nDoes the following test automation fully cover the criteria?\nFeature Files:\n{feature_text}\n\nStep Definitions:\n{step_def_text}.\n\nRespond with a detailed analysis of the coverage.
+    "
+#validation_result = validation_pipeline(validation_prompt, max_new_tokens=200)[0]['generated_text']
 
+# Tokenize input
+inputs = tokenizer(validation_prompt, return_tensors="pt", truncation=True, max_length=4096)
+# Generate response
+with torch.no_grad():
+    output = model.generate(**inputs, max_new_tokens=500, temperature=0.7, do_sample=True)
+
+validation_result = tokenizer.decode(output[0], skip_special_tokens=True)
 
 print("\n🔹 AI VALIDATION RESULT 🔹")
 print(validation_result)
