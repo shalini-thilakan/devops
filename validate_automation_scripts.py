@@ -6,6 +6,8 @@ ACCEPTANCE_CRITERIA = sys.argv[1]
 FEATURE_FILES = sys.argv[2].split("\n")
 STEP_DEF_FILES = sys.argv[3].split("\n")
 
+GPT_MODEL = "gpt-4o"
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def read_file_content(file_paths):
@@ -30,7 +32,7 @@ step_def_text = read_file_content(STEP_DEF_FILES)
 openai_client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
 
 AC_IN_PLAINTEXT_RESPONSE = openai_client.chat.completions.create(
-    model="gpt-4-turbo",
+    model=f"{GPT_MODEL}",
     messages=[
         {"role": "system", "content": "Extract and return only the acceptance criteria as plain text from this JSON."},
         {"role": "user", "content": f"{ACCEPTANCE_CRITERIA}"}
@@ -42,7 +44,7 @@ AC_IN_PLAINTEXT = AC_IN_PLAINTEXT_RESPONSE["choices"][0]["message"]["content"]
 
 # AI Validation using OpenAI
 response = openai_client.chat.completions.create(
-    model="gpt-4-turbo",
+    model=f"{GPT_MODEL}",
     messages=[
         {"role": "system", "content": "You are an expert in BDD test automation."},
         {"role": "user", "content": f"Here are the acceptance criteria:\n{AC_IN_PLAINTEXT}\n\nDoes the following test automation fully cover the criteria?\nFeature Files:\n{feature_text}\n\nStep Definitions:\n{step_def_text}"}
