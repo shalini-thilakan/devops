@@ -39,31 +39,41 @@ jobs:
         run: |
           JIRA_API_URL="https://shalinithilakan.atlassian.net/rest/api/3/issue/${{ env.JIRA_KEY }}"
           RESPONSE=$(curl -u "${{ secrets.JIRA_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" -X GET -H "Content-Type: application/json" "$JIRA_API_URL")
-          ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.description') # Replace with actual field ID
+          ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.description' | tr '\n' ' ' | sed 's/"/\\"/g') # Replace with actual field ID
           if [[ -z "$ACCEPTANCE_CRITERIA" ]]; then
             echo "❌ No acceptance criteria found in JIRA ticket."
             exit 1
           fi
           echo "✅ Fetched Acceptance Criteria."
-          echo "ACCEPTANCE_CRITERIA=$ACCEPTANCE_CRITERIA" >> $GITHUB_ENV
+          echo "$ACCEPTANCE_CRITERIA"
 
-      - name: Fetch Changed Files in PR
-        id: fetch_files
+          # Store in GitHub Actions Environment Variable safely
+          echo "ACCEPTANCE_CRITERIA<<EOF" >> $GITHUB_ENV
+          echo "$ACCEPTANCE_CRITERIA" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Search for Feature Files and Step Definitions
+        id: fetch_tests
         run: |
-          CHANGED_FILES=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files" | jq -r '.[].filename')
-          if [[ -z "$CHANGED_FILES" ]]; then
-            echo "❌ No changed files found in PR."
+          FEATURE_FILES=$(find ./src/test/resources/features -name "*.feature")
+          STEP_DEF_FILES=$(find ./src/test/java/stepdefinitions -name "*.java")
+
+          if [[ -z "$FEATURE_FILES" || -z "$STEP_DEF_FILES" ]]; then
+            echo "❌ No test automation files found."
             exit 1
           fi
-          echo "✅ Found changed files: $CHANGED_FILES"
-          echo "CHANGED_FILES=$CHANGED_FILES" >> $GITHUB_ENV
+
+          echo "✅ Found Feature Files: $FEATURE_FILES"
+          echo "✅ Found Step Definitions: $STEP_DEF_FILES"
+
+          echo "FEATURE_FILES=$FEATURE_FILES" >> $GITHUB_ENV
+          echo "STEP_DEF_FILES=$STEP_DEF_FILES" >> $GITHUB_ENV
 
       - name: Run AI Validation on Test Scripts
         id: ai_validation
         run: |
           pip install openai
-          python validate_automation_scripts.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.CHANGED_FILES }}"
+          python validate_automation_scripts.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}"
 
       - name: Fail Build if AI Validation Fails
         if: failure()

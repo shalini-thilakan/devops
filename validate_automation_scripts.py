@@ -1,39 +1,50 @@
 import sys
-import openai
 import os
+import openai
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+ACCEPTANCE_CRITERIA = sys.argv[1]
+FEATURE_FILES = sys.argv[2].split("\n")
+STEP_DEF_FILES = sys.argv[3].split("\n")
 
-def validate_test_cases(acceptance_criteria, test_files):
-    with open(test_files, "r") as file:
-        test_script = file.read()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    prompt = f"""
-    Given the following acceptance criteria from JIRA:
+def read_file_content(file_paths):
+    content = ""
+    for file_path in file_paths:
+        try:
+            with open(file_path, "r", encoding="utf-8") as file:
+                content += f"\n### {file_path} ###\n" + file.read() + "\n\n"
+        except Exception as e:
+            print(f"⚠️ Could not read file {file_path}: {e}")
+    return content
 
-    {acceptance_criteria}
+# Print fetched acceptance criteria
+print("\n🔹 ACCEPTANCE CRITERIA FROM JIRA 🔹")
+print(ACCEPTANCE_CRITERIA)
+print("\n----------------------------------\n")
 
-    And the following automation test script:
+# Read test automation files
+feature_text = read_file_content(FEATURE_FILES)
+step_def_text = read_file_content(STEP_DEF_FILES)
 
-    {test_script}
+# AI Validation using OpenAI
+response = openai.ChatCompletion.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are an expert in BDD test automation."},
+        {"role": "user", "content": f"Here are the acceptance criteria:\n{ACCEPTANCE_CRITERIA}\n\nDoes the following test automation fully cover the criteria?\nFeature Files:\n{feature_text}\n\nStep Definitions:\n{step_def_text}"}
+    ]
+)
 
-    Analyze whether the test script correctly validates all the acceptance criteria. 
-    List any missing validations or incorrect implementations.
-    """
+validation_result = response["choices"][0]["message"]["content"]
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[{"role": "system", "content": "You are an expert test case validator."},
-                  {"role": "user", "content": prompt}]
-    )
+print("\n🔹 AI VALIDATION RESULT 🔹")
+print(validation_result)
+print("\n----------------------------------\n")
 
-    result = response["choices"][0]["message"]["content"]
-    print(result)
-
-    if "missing" in result.lower() or "does not validate" in result.lower():
-        sys.exit(1)
-
-if __name__ == "__main__":
-    acceptance_criteria = sys.argv[1]
-    test_files = sys.argv[2]
-    validate_test_cases(acceptance_criteria, test_files)
+if "no" in validation_result.lower():
+    print("❌ Automation test coverage is incomplete.")
+    sys.exit(1)
+else:
+    print("✅ Automation test coverage is sufficient.")
+    sys.exit(0)
