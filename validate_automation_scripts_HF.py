@@ -68,7 +68,8 @@ Does the following test automation fully cover the criteria?
 🔹 Step Definitions:
 {step_def_text}
 
-Respond with a detailed analysis of the coverage.
+Classify the response as "Positive" or "Negative" based on whether the automation script fully covers the acceptance criteria.
+Only return "Positive" or "Negative".
 """
 
 #validation_result = validation_pipeline(validation_prompt, max_new_tokens=200)[0]['generated_text']
@@ -85,24 +86,24 @@ print("\n🔹 AI VALIDATION RESULT 🔹")
 print(validation_result)
 print("\n----------------------------------\n")
 
-RESULT_CLASSIFICATION_PROMPT = f"""
-Classify the following response as "Positive" or "Negative" based on whether the automation script fully covers the acceptance criteria:
+# RESULT_CLASSIFICATION_PROMPT = f"""
+# Classify the following response as "Positive" or "Negative" based on whether the automation script fully covers the acceptance criteria:
 
-Response:
-{validation_result}
+# Response:
+# {validation_result}
 
-Only return "Positive" or "Negative".
-"""
+# Only return "Positive" or "Negative".
+# """
 
-clsfn_inputs = tokenizer(RESULT_CLASSIFICATION_PROMPT, return_tensors="pt")
-clsfn_outputs = model.generate(**clsfn_inputs, max_new_tokens=100)
-classification = tokenizer.decode(clsfn_outputs[0], skip_special_tokens=True)
+# clsfn_inputs = tokenizer(RESULT_CLASSIFICATION_PROMPT, return_tensors="pt")
+# clsfn_outputs = model.generate(**clsfn_inputs, max_new_tokens=100)
+# classification = tokenizer.decode(clsfn_outputs[0], skip_special_tokens=True)
 
-print("\n🔹 CLASSIFICATION 🔹")
-print(classification)
-print("\n----------------------------------\n")
+# print("\n🔹 CLASSIFICATION 🔹")
+# print(classification)
+# print("\n----------------------------------\n")
 
-if "negative" in classification.lower():
+if "negative" in validation_result.lower():
     print("❌ Automation test coverage is incomplete.")
     sys.exit(1)
 else:
