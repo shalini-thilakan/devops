@@ -48,17 +48,21 @@ jobs:
           echo "$ACCEPTANCE_CRITERIA"
 
           # Call OpenAI to extract only the acceptance criteria from JSON
-          FORMATTED_ACCEPTANCE_CRITERIA=$(echo "$ACCEPTANCE_CRITERIA" | \
-            curl -X POST "https://api.openai.com/v1/chat/completions" \
-            -H "Authorization: Bearer $OPENAI_API_KEY" \
+          FORMATTED_ACCEPTANCE_CRITERIA=$(curl -X POST "https://api.openai.com/v1/chat/completions" \
+            -H "Authorization: Bearer ${{ secrets.OPENAI_API_KEY }}" \
             -H "Content-Type: application/json" \
             -d '{
               "model": "gpt-4-turbo",
               "messages": [
-                {"role": "system", "content": "Extract and return only the acceptance criteria as plain text from this JSON."},
+                {"role": "system", "content": "Extract and return only the acceptance criteria as plain text."},
                 {"role": "user", "content": "'"$ACCEPTANCE_CRITERIA"'"}
               ]
             }' | jq -r '.choices[0].message.content')
+
+          if [[ -z "$FORMATTED_ACCEPTANCE_CRITERIA" ]]; then
+            echo "❌ Failed to extract acceptance criteria."
+            exit 1
+          fi
 
           echo "✅ Formatted Acceptance Criteria."
           echo "$FORMATTED_ACCEPTANCE_CRITERIA"
