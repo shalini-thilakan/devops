@@ -26,16 +26,16 @@ print("\n----------------------------------\n")
 
 
 # Load a Hugging Face LLM for text generation (e.g., `mistralai/Mistral-7B-Instruct`)
-extract_pipeline = pipeline("text-generation", model=f"{EXTRACTION_MODEL}")
+# extract_pipeline = pipeline("text-generation", model=f"{EXTRACTION_MODEL}")
 
-# Extract plain text acceptance criteria from JSON
-extraction_prompt = f"Extract and return only the acceptance criteria as plain text from this JSON:\n{ACCEPTANCE_CRITERIA}"
-AC_IN_PLAINTEXT = extract_pipeline(extraction_prompt, max_new_tokens=200)[0]['generated_text']
+# # Extract plain text acceptance criteria from JSON
+# extraction_prompt = f"Extract and return only the acceptance criteria as plain text from this JSON:\n{ACCEPTANCE_CRITERIA}"
+# AC_IN_PLAINTEXT = extract_pipeline(extraction_prompt, max_new_tokens=200)[0]['generated_text']
 
-# Print fetched acceptance criteria
-print("\n🔹 Extracted ACCEPTANCE CRITERIA 🔹")
-print(AC_IN_PLAINTEXT)
-print("\n----------------------------------\n")
+# # Print fetched acceptance criteria
+# print("\n🔹 Extracted ACCEPTANCE CRITERIA 🔹")
+# print(AC_IN_PLAINTEXT)
+# print("\n----------------------------------\n")
 
 
 # Read test automation files
@@ -46,7 +46,7 @@ step_def_text = read_file_content(STEP_DEF_FILES)
 validation_pipeline = pipeline("text-generation", model=f"{VALIDATION_MODEL}")
 
 # AI Validation using Hugging Face model
-validation_prompt = f"You are an expert in BDD test automation. Here are the acceptance criteria:\n{AC_IN_PLAINTEXT}\n\nDoes the following test automation fully cover the criteria?\nFeature Files:\n{feature_text}\n\nStep Definitions:\n{step_def_text}"
+validation_prompt = f"You are an expert in BDD test automation. Here are the acceptance criteria:\n{ACCEPTANCE_CRITERIA}\n\nDoes the following test automation fully cover the criteria?\nFeature Files:\n{feature_text}\n\nStep Definitions:\n{step_def_text}"
 validation_result = validation_pipeline(validation_prompt, max_new_tokens=200)[0]['generated_text']
 
 
