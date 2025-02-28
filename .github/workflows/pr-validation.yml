@@ -18,6 +18,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Install dependencies
+        run: |
+          pip install transformers huggingface_hub
+
+      - name: Authenticate with Hugging Face
+        run: |
+          huggingface-cli login --token ${{ secrets.HF_TOKEN }}
+
       - name: Set API Key as Environment Variable
         run: echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
 
