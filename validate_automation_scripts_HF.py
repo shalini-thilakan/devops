@@ -69,7 +69,7 @@ Does the following test automation fully cover the criteria?
 {step_def_text}
 
 Classify the response as "Positive" or "Negative" based on whether the automation script fully covers the acceptance criteria.
-Only return "Positive" or "Negative".
+Only return the word "Positive" or "Negative". Dont include the prompt in the reponse.
 """
 
 #validation_result = validation_pipeline(validation_prompt, max_new_tokens=200)[0]['generated_text']
