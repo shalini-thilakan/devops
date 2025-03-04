@@ -60,19 +60,26 @@ jobs:
           echo "✅ Fetched Issues"
           echo "$ISSUES"
 
+          AC=$(echo "$ISSUES" | jq -c 'reduce .[] as $item ({}; .[$item.key] = $item.fields.description)')
+
+          echo "✅ Fetched Acceptance Criteria"
+          echo "$AC"
+
+          echo $AC > criteria.json
+          
           # # Save the full JSON response to a file
-          echo "$ISSUES" > jira_issues.json
+          #echo "$ISSUES" > jira_issues.json
 
           # Store in GitHub Actions Environment Variable safely
           # echo "ISSUES<<EOF" >> $GITHUB_ENV
           # echo "$ISSUES" >> $GITHUB_ENV
           # echo "EOF" >> $GITHUB_ENV
 
-      - name: Extract acceptance criteria
-        id: extract_criteria
-        run: |
-          # python scripts/extract_acceptance_criteria.py > criteria.json
-          python scripts/extract_acceptance_criteria.py jira_issues.json > criteria.json         
+      # - name: Extract acceptance criteria
+      #   id: extract_criteria
+      #   run: |
+      #     # python scripts/extract_acceptance_criteria.py > criteria.json
+      #     python scripts/extract_acceptance_criteria.py jira_issues.json > criteria.json         
 
       - name: Search for Feature Files and Step Definitions
         id: fetch_tests
@@ -106,5 +113,5 @@ jobs:
       - name: Verify automation coverage
         id: check_coverage
         run: |
-          python scripts/validate_coverage_DS.py "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}" > coverage_report.json
+          python scripts/validate_coverage_DS.py criteria.json "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}" > coverage_report.json
 
