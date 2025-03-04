@@ -1,7 +1,7 @@
 import json
 import sys
 
-with open("jira_issues.json", "r") as f:
+with open(sys.argv[1], "r") as f:
     jira_issues = json.load(f)
 
 #jira_issues=json.load(sys.argv[1])
