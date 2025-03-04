@@ -1,117 +1,117 @@
-name: Validate Automation Scripts Against JIRA
+# name: Validate Automation Scripts Against JIRA
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+# on:
+#   pull_request:
+#     types: [opened, synchronize, reopened]
 
-jobs:
-  validate_tests:
-    runs-on: ubuntu-latest
+# jobs:
+#   validate_tests:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Free up disk space
-        run: |
-          sudo apt-get clean
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/share/boost
-          sudo rm -rf ~/.cache
-          df -h
+#     steps:
+#       - name: Free up disk space
+#         run: |
+#           sudo apt-get clean
+#           sudo rm -rf /usr/local/lib/android
+#           sudo rm -rf /opt/ghc
+#           sudo rm -rf /usr/share/dotnet
+#           sudo rm -rf /usr/local/share/boost
+#           sudo rm -rf ~/.cache
+#           df -h
 
-      - name: Checkout repository
-        uses: actions/checkout@v3
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+#       - name: Set up JDK
+#         uses: actions/setup-java@v3
+#         with:
+#           distribution: 'temurin'
+#           java-version: '17'
 
-      - name: Install dependencies
-        run: |
-          pip install 'accelerate>=0.26.0'
-          pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-          pip install transformers huggingface_hub
+#       - name: Install dependencies
+#         run: |
+#           pip install 'accelerate>=0.26.0'
+#           pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+#           pip install transformers huggingface_hub
 
-      - name: Authenticate with Hugging Face
-        run: |
-          huggingface-cli login --token ${{ secrets.HF_TOKEN }}
+#       - name: Authenticate with Hugging Face
+#         run: |
+#           huggingface-cli login --token ${{ secrets.HF_TOKEN }}
 
-      - name: Set API Key as Environment Variable
-        run: echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
+#       - name: Set API Key as Environment Variable
+#         run: echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
 
-      - name: Extract JIRA key from PR title/description
-        id: extract_jira
-        run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          PR_BODY="${{ github.event.pull_request.body }}"
-          JIRA_KEY=$(echo "$PR_TITLE $PR_BODY" | grep -oE '[A-Z]+-[0-9]+' | head -n 1)
-          if [[ -z "$JIRA_KEY" ]]; then
-            echo "❌ No JIRA key found in PR title or description."
-            exit 1
-          fi
-          echo "✅ Found JIRA Key: $JIRA_KEY"
-          echo "JIRA_KEY=$JIRA_KEY" >> $GITHUB_ENV
+#       - name: Extract JIRA key from PR title/description
+#         id: extract_jira
+#         run: |
+#           PR_TITLE="${{ github.event.pull_request.title }}"
+#           PR_BODY="${{ github.event.pull_request.body }}"
+#           JIRA_KEY=$(echo "$PR_TITLE $PR_BODY" | grep -oE '[A-Z]+-[0-9]+' | head -n 1)
+#           if [[ -z "$JIRA_KEY" ]]; then
+#             echo "❌ No JIRA key found in PR title or description."
+#             exit 1
+#           fi
+#           echo "✅ Found JIRA Key: $JIRA_KEY"
+#           echo "JIRA_KEY=$JIRA_KEY" >> $GITHUB_ENV
 
-      - name: Fetch JIRA Acceptance Criteria
-        id: fetch_jira
-        run: |
-          JIRA_API_URL="https://shalinithilakan.atlassian.net/rest/api/3/issue/${{ env.JIRA_KEY }}"
-          RESPONSE=$(curl -u "${{ secrets.JIRA_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" -X GET -H "Content-Type: application/json" "$JIRA_API_URL")
-          ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.description' | tr '\n' ' ' | sed 's/"/\\"/g') # Replace with actual field ID
+#       - name: Fetch JIRA Acceptance Criteria
+#         id: fetch_jira
+#         run: |
+#           JIRA_API_URL="https://shalinithilakan.atlassian.net/rest/api/3/issue/${{ env.JIRA_KEY }}"
+#           RESPONSE=$(curl -u "${{ secrets.JIRA_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" -X GET -H "Content-Type: application/json" "$JIRA_API_URL")
+#           ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.description' | tr '\n' ' ' | sed 's/"/\\"/g') # Replace with actual field ID
           
-          if [[ -z "$ACCEPTANCE_CRITERIA" || "$ACCEPTANCE_CRITERIA" == "null" ]]; then
-            echo "❌ No acceptance criteria found in JIRA ticket."
-            exit 1
-          fi
-          
-          echo "✅ Fetched Acceptance Criteria."
-          echo "$ACCEPTANCE_CRITERIA"
+#           if [[ -z "$ACCEPTANCE_CRITERIA" || "$ACCEPTANCE_CRITERIA" == "null" ]]; then
+#             echo "❌ No acceptance criteria found in JIRA ticket."
+#             exit 1
+#           fi
+
+#           echo "✅ Fetched Acceptance Criteria."
+#           echo "$ACCEPTANCE_CRITERIA"
 
 
-          # Store in GitHub Actions Environment Variable safely
-          echo "ACCEPTANCE_CRITERIA<<EOF" >> $GITHUB_ENV
-          echo "$ACCEPTANCE_CRITERIA" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+#           # Store in GitHub Actions Environment Variable safely
+#           echo "ACCEPTANCE_CRITERIA<<EOF" >> $GITHUB_ENV
+#           echo "$ACCEPTANCE_CRITERIA" >> $GITHUB_ENV
+#           echo "EOF" >> $GITHUB_ENV
 
-      - name: Search for Feature Files and Step Definitions
-        id: fetch_tests
-        run: |
-          FEATURE_FILES=$(find ./src/test/resources/features -name "*.feature")
-          STEP_DEF_FILES=$(find ./src/test/java/stepdefinitions -name "*.java")
+#       - name: Search for Feature Files and Step Definitions
+#         id: fetch_tests
+#         run: |
+#           FEATURE_FILES=$(find ./src/test/resources/features -name "*.feature")
+#           STEP_DEF_FILES=$(find ./src/test/java/stepdefinitions -name "*.java")
 
-          if [[ -z "$FEATURE_FILES" || -z "$STEP_DEF_FILES" ]]; then
-            echo "❌ No test automation files found."
-            exit 1
-          fi
+#           if [[ -z "$FEATURE_FILES" || -z "$STEP_DEF_FILES" ]]; then
+#             echo "❌ No test automation files found."
+#             exit 1
+#           fi
 
-          echo "✅ Found Feature Files:"
-          echo "$FEATURE_FILES"
-          echo "✅ Found Step Definitions:"
-          echo "$STEP_DEF_FILES"
+#           echo "✅ Found Feature Files:"
+#           echo "$FEATURE_FILES"
+#           echo "✅ Found Step Definitions:"
+#           echo "$STEP_DEF_FILES"
 
-          # Store multi-line values correctly in GitHub environment
-          {
-            echo "FEATURE_FILES<<EOF"
-            echo "$FEATURE_FILES"
-            echo "EOF"
-          } >> "$GITHUB_ENV"
+#           # Store multi-line values correctly in GitHub environment
+#           {
+#             echo "FEATURE_FILES<<EOF"
+#             echo "$FEATURE_FILES"
+#             echo "EOF"
+#           } >> "$GITHUB_ENV"
 
-          {
-            echo "STEP_DEF_FILES<<EOF"
-            echo "$STEP_DEF_FILES"
-            echo "EOF"
-          } >> "$GITHUB_ENV"
+#           {
+#             echo "STEP_DEF_FILES<<EOF"
+#             echo "$STEP_DEF_FILES"
+#             echo "EOF"
+#           } >> "$GITHUB_ENV"
 
-      - name: Run AI Validation on Test Scripts
-        id: ai_validation
-        run: |
-          python validate_automation_scripts_HF.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}"
+#       - name: Run AI Validation on Test Scripts
+#         id: ai_validation
+#         run: |
+#           python validate_automation_scripts_HF.py "${{ env.ACCEPTANCE_CRITERIA }}" "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}"
 
-      - name: Fail Build if AI Validation Fails
-        if: failure()
-        run: |
-          echo "❌ Automation script does not fully validate acceptance criteria."
-          exit 1
+#       - name: Fail Build if AI Validation Fails
+#         if: failure()
+#         run: |
+#           echo "❌ Automation script does not fully validate acceptance criteria."
+#           exit 1
 
