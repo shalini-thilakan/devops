@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TransactionSteps {
+public class InsufficientBalanceSteps {
     WebDriver driver;
 
     @Given("a customer with a debit card and insufficient balance")

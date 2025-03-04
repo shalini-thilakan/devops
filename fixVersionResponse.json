@@ -1,0 +1,972 @@
+{
+    "expand": "schema,names",
+    "startAt": 0,
+    "maxResults": 50,
+    "total": 5,
+    "issues": [
+        {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,customfield_10010.requestTypePractice,renderedFields",
+            "id": "10004",
+            "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/10004",
+            "key": "SCRUM-5",
+            "fields": {
+                "statuscategorychangedate": "2025-03-04T18:22:24.860+0530",
+                "issuetype": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issuetype/10003",
+                    "id": "10003",
+                    "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+                    "name": "Story",
+                    "subtask": false,
+                    "avatarId": 10315,
+                    "entityId": "027bcb6a-6689-4838-9017-d7b7ad13f760",
+                    "hierarchyLevel": 0
+                },
+                "timespent": null,
+                "customfield_10030": null,
+                "project": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "SCRUM",
+                    "name": "AIDevops",
+                    "projectTypeKey": "software",
+                    "simplified": true,
+                    "avatarUrls": {
+                        "48x48": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407",
+                        "24x24": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=small",
+                        "16x16": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=xsmall",
+                        "32x32": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=medium"
+                    }
+                },
+                "customfield_10031": null,
+                "customfield_10032": null,
+                "fixVersions": [
+                    {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/version/10000",
+                        "id": "10000",
+                        "description": "",
+                        "name": "2025.04",
+                        "archived": false,
+                        "released": true,
+                        "releaseDate": "2025-03-07"
+                    }
+                ],
+                "customfield_10034": null,
+                "aggregatetimespent": null,
+                "resolution": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/resolution/10000",
+                    "id": "10000",
+                    "description": "Work has been completed on this issue.",
+                    "name": "Done"
+                },
+                "customfield_10035": null,
+                "customfield_10027": null,
+                "customfield_10028": null,
+                "customfield_10029": null,
+                "resolutiondate": "2025-03-04T18:22:24.856+0530",
+                "workratio": -1,
+                "watches": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-5/watchers",
+                    "watchCount": 1,
+                    "isWatching": true
+                },
+                "lastViewed": "2025-03-04T18:21:32.670+0530",
+                "created": "2025-03-04T17:14:08.182+0530",
+                "customfield_10020": [
+                    {
+                        "id": 1,
+                        "name": "SCRUM Sprint 1",
+                        "state": "active",
+                        "boardId": 1,
+                        "goal": "",
+                        "startDate": "2025-03-04T11:56:28.369Z",
+                        "endDate": "2025-03-18T11:56:19.000Z"
+                    }
+                ],
+                "customfield_10021": null,
+                "customfield_10022": null,
+                "customfield_10023": null,
+                "priority": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/priority/3",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/images/icons/priorities/medium_new.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "customfield_10024": null,
+                "customfield_10025": null,
+                "labels": [],
+                "customfield_10026": "10000_*:*_1_*:*_4096678_*|*_10002_*:*_1_*:*_0",
+                "customfield_10016": null,
+                "customfield_10017": null,
+                "customfield_10018": {
+                    "hasEpicLinkFieldDependency": false,
+                    "showField": false,
+                    "nonEditableReason": {
+                        "reason": "EPIC_LINK_SHOULD_BE_USED",
+                        "message": "To set an epic as the parent, use the epic link instead"
+                    }
+                },
+                "customfield_10019": "0|i0000v:",
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "issuelinks": [],
+                "assignee": null,
+                "updated": "2025-03-04T18:22:24.860+0530",
+                "status": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/status/10002",
+                    "description": "",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/",
+                    "name": "Done",
+                    "id": "10002",
+                    "statusCategory": {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/statuscategory/3",
+                        "id": 3,
+                        "key": "done",
+                        "colorName": "green",
+                        "name": "Done"
+                    }
+                },
+                "components": [],
+                "timeoriginalestimate": null,
+                "description": "Scenario: Customer tries to make an online payment with insufficient balance\n  Given a customer with a debit card and insufficient balance\n  When they attempt an online transaction\n  Then the transaction should be declined",
+                "customfield_10010": null,
+                "customfield_10014": null,
+                "customfield_10015": null,
+                "customfield_10005": null,
+                "customfield_10006": null,
+                "security": null,
+                "customfield_10007": null,
+                "customfield_10008": null,
+                "customfield_10009": null,
+                "aggregatetimeestimate": null,
+                "summary": "Validate insufficient balance",
+                "creator": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "subtasks": [],
+                "reporter": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "customfield_10000": "{}",
+                "customfield_10001": null,
+                "customfield_10002": [],
+                "customfield_10003": null,
+                "customfield_10004": null,
+                "environment": null,
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "votes": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-5/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                }
+            }
+        },
+        {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,customfield_10010.requestTypePractice,renderedFields",
+            "id": "10003",
+            "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/10003",
+            "key": "SCRUM-4",
+            "fields": {
+                "statuscategorychangedate": "2025-03-04T18:21:25.231+0530",
+                "issuetype": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issuetype/10003",
+                    "id": "10003",
+                    "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+                    "name": "Story",
+                    "subtask": false,
+                    "avatarId": 10315,
+                    "entityId": "027bcb6a-6689-4838-9017-d7b7ad13f760",
+                    "hierarchyLevel": 0
+                },
+                "timespent": null,
+                "customfield_10030": null,
+                "project": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "SCRUM",
+                    "name": "AIDevops",
+                    "projectTypeKey": "software",
+                    "simplified": true,
+                    "avatarUrls": {
+                        "48x48": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407",
+                        "24x24": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=small",
+                        "16x16": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=xsmall",
+                        "32x32": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=medium"
+                    }
+                },
+                "customfield_10031": null,
+                "customfield_10032": null,
+                "fixVersions": [
+                    {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/version/10000",
+                        "id": "10000",
+                        "description": "",
+                        "name": "2025.04",
+                        "archived": false,
+                        "released": true,
+                        "releaseDate": "2025-03-07"
+                    }
+                ],
+                "customfield_10034": null,
+                "aggregatetimespent": null,
+                "resolution": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/resolution/10000",
+                    "id": "10000",
+                    "description": "Work has been completed on this issue.",
+                    "name": "Done"
+                },
+                "customfield_10035": null,
+                "customfield_10027": null,
+                "customfield_10028": null,
+                "customfield_10029": null,
+                "resolutiondate": "2025-03-04T18:21:25.227+0530",
+                "workratio": -1,
+                "lastViewed": "2025-03-04T18:21:15.205+0530",
+                "watches": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-4/watchers",
+                    "watchCount": 1,
+                    "isWatching": true
+                },
+                "created": "2025-03-04T17:13:49.422+0530",
+                "customfield_10020": [
+                    {
+                        "id": 1,
+                        "name": "SCRUM Sprint 1",
+                        "state": "active",
+                        "boardId": 1,
+                        "goal": "",
+                        "startDate": "2025-03-04T11:56:28.369Z",
+                        "endDate": "2025-03-18T11:56:19.000Z"
+                    }
+                ],
+                "customfield_10021": null,
+                "customfield_10022": null,
+                "customfield_10023": null,
+                "priority": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/priority/3",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/images/icons/priorities/medium_new.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "customfield_10024": null,
+                "customfield_10025": null,
+                "customfield_10026": "10000_*:*_1_*:*_4055809_*|*_10002_*:*_1_*:*_0",
+                "labels": [],
+                "customfield_10016": null,
+                "customfield_10017": null,
+                "customfield_10018": {
+                    "hasEpicLinkFieldDependency": false,
+                    "showField": false,
+                    "nonEditableReason": {
+                        "reason": "EPIC_LINK_SHOULD_BE_USED",
+                        "message": "To set an epic as the parent, use the epic link instead"
+                    }
+                },
+                "customfield_10019": "0|i0000n:",
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "issuelinks": [],
+                "assignee": null,
+                "updated": "2025-03-04T18:21:25.231+0530",
+                "status": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/status/10002",
+                    "description": "",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/",
+                    "name": "Done",
+                    "id": "10002",
+                    "statusCategory": {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/statuscategory/3",
+                        "id": 3,
+                        "key": "done",
+                        "colorName": "green",
+                        "name": "Done"
+                    }
+                },
+                "components": [],
+                "timeoriginalestimate": null,
+                "description": "Scenario: Customer enters incorrect PIN three times\n  Given a customer with an active debit card\n  When they enter an incorrect PIN three times\n  Then the card should be temporarily blocked",
+                "customfield_10010": null,
+                "customfield_10014": null,
+                "customfield_10015": null,
+                "customfield_10005": null,
+                "customfield_10006": null,
+                "security": null,
+                "customfield_10007": null,
+                "customfield_10008": null,
+                "customfield_10009": null,
+                "aggregatetimeestimate": null,
+                "summary": "Validate incorrect pin entry",
+                "creator": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "subtasks": [],
+                "reporter": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "customfield_10000": "{}",
+                "customfield_10001": null,
+                "customfield_10002": [],
+                "customfield_10003": null,
+                "customfield_10004": null,
+                "environment": null,
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "votes": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-4/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                }
+            }
+        },
+        {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,customfield_10010.requestTypePractice,renderedFields",
+            "id": "10002",
+            "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/10002",
+            "key": "SCRUM-3",
+            "fields": {
+                "statuscategorychangedate": "2025-03-04T18:21:08.081+0530",
+                "issuetype": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issuetype/10003",
+                    "id": "10003",
+                    "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+                    "name": "Story",
+                    "subtask": false,
+                    "avatarId": 10315,
+                    "entityId": "027bcb6a-6689-4838-9017-d7b7ad13f760",
+                    "hierarchyLevel": 0
+                },
+                "timespent": null,
+                "customfield_10030": null,
+                "project": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "SCRUM",
+                    "name": "AIDevops",
+                    "projectTypeKey": "software",
+                    "simplified": true,
+                    "avatarUrls": {
+                        "48x48": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407",
+                        "24x24": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=small",
+                        "16x16": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=xsmall",
+                        "32x32": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=medium"
+                    }
+                },
+                "customfield_10031": null,
+                "customfield_10032": null,
+                "fixVersions": [
+                    {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/version/10000",
+                        "id": "10000",
+                        "description": "",
+                        "name": "2025.04",
+                        "archived": false,
+                        "released": true,
+                        "releaseDate": "2025-03-07"
+                    }
+                ],
+                "customfield_10034": null,
+                "aggregatetimespent": null,
+                "resolution": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/resolution/10000",
+                    "id": "10000",
+                    "description": "Work has been completed on this issue.",
+                    "name": "Done"
+                },
+                "customfield_10035": null,
+                "customfield_10027": null,
+                "customfield_10028": null,
+                "customfield_10029": null,
+                "resolutiondate": "2025-03-04T18:21:08.077+0530",
+                "workratio": -1,
+                "lastViewed": "2025-03-04T18:20:53.816+0530",
+                "watches": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-3/watchers",
+                    "watchCount": 1,
+                    "isWatching": true
+                },
+                "created": "2025-03-04T17:13:34.021+0530",
+                "customfield_10020": [
+                    {
+                        "id": 1,
+                        "name": "SCRUM Sprint 1",
+                        "state": "active",
+                        "boardId": 1,
+                        "goal": "",
+                        "startDate": "2025-03-04T11:56:28.369Z",
+                        "endDate": "2025-03-18T11:56:19.000Z"
+                    }
+                ],
+                "customfield_10021": null,
+                "customfield_10022": null,
+                "customfield_10023": null,
+                "priority": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/priority/3",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/images/icons/priorities/medium_new.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "customfield_10024": null,
+                "customfield_10025": null,
+                "customfield_10026": "10000_*:*_1_*:*_4054059_*|*_10002_*:*_1_*:*_0",
+                "labels": [],
+                "customfield_10016": null,
+                "customfield_10017": null,
+                "customfield_10018": {
+                    "hasEpicLinkFieldDependency": false,
+                    "showField": false,
+                    "nonEditableReason": {
+                        "reason": "EPIC_LINK_SHOULD_BE_USED",
+                        "message": "To set an epic as the parent, use the epic link instead"
+                    }
+                },
+                "customfield_10019": "0|i0000f:",
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "issuelinks": [],
+                "assignee": null,
+                "updated": "2025-03-04T18:21:08.080+0530",
+                "status": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/status/10002",
+                    "description": "",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/",
+                    "name": "Done",
+                    "id": "10002",
+                    "statusCategory": {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/statuscategory/3",
+                        "id": 3,
+                        "key": "done",
+                        "colorName": "green",
+                        "name": "Done"
+                    }
+                },
+                "components": [],
+                "timeoriginalestimate": null,
+                "description": "Scenario: Contactless payment below limit\n  Given a customer with a debit card enabled for contactless payments\n  When they make a transaction below the limit\n  Then the transaction should be approved without a PIN",
+                "customfield_10010": null,
+                "customfield_10014": null,
+                "customfield_10015": null,
+                "customfield_10005": null,
+                "customfield_10006": null,
+                "security": null,
+                "customfield_10007": null,
+                "customfield_10008": null,
+                "customfield_10009": null,
+                "aggregatetimeestimate": null,
+                "summary": "Validate contactless payment",
+                "creator": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "subtasks": [],
+                "reporter": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "customfield_10000": "{}",
+                "customfield_10001": null,
+                "customfield_10002": [],
+                "customfield_10003": null,
+                "customfield_10004": null,
+                "environment": null,
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "votes": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-3/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                }
+            }
+        },
+        {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,customfield_10010.requestTypePractice,renderedFields",
+            "id": "10001",
+            "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/10001",
+            "key": "SCRUM-2",
+            "fields": {
+                "statuscategorychangedate": "2025-03-04T18:20:46.142+0530",
+                "issuetype": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issuetype/10003",
+                    "id": "10003",
+                    "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+                    "name": "Story",
+                    "subtask": false,
+                    "avatarId": 10315,
+                    "entityId": "027bcb6a-6689-4838-9017-d7b7ad13f760",
+                    "hierarchyLevel": 0
+                },
+                "timespent": null,
+                "customfield_10030": null,
+                "project": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "SCRUM",
+                    "name": "AIDevops",
+                    "projectTypeKey": "software",
+                    "simplified": true,
+                    "avatarUrls": {
+                        "48x48": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407",
+                        "24x24": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=small",
+                        "16x16": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=xsmall",
+                        "32x32": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=medium"
+                    }
+                },
+                "customfield_10031": null,
+                "customfield_10032": null,
+                "fixVersions": [
+                    {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/version/10000",
+                        "id": "10000",
+                        "description": "",
+                        "name": "2025.04",
+                        "archived": false,
+                        "released": true,
+                        "releaseDate": "2025-03-07"
+                    }
+                ],
+                "customfield_10034": null,
+                "aggregatetimespent": null,
+                "resolution": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/resolution/10000",
+                    "id": "10000",
+                    "description": "Work has been completed on this issue.",
+                    "name": "Done"
+                },
+                "customfield_10035": null,
+                "customfield_10027": null,
+                "customfield_10028": null,
+                "customfield_10029": null,
+                "resolutiondate": "2025-03-04T18:20:46.138+0530",
+                "workratio": -1,
+                "watches": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-2/watchers",
+                    "watchCount": 1,
+                    "isWatching": true
+                },
+                "lastViewed": "2025-03-04T18:20:25.082+0530",
+                "created": "2025-03-04T16:27:06.104+0530",
+                "customfield_10020": [
+                    {
+                        "id": 1,
+                        "name": "SCRUM Sprint 1",
+                        "state": "active",
+                        "boardId": 1,
+                        "goal": "",
+                        "startDate": "2025-03-04T11:56:28.369Z",
+                        "endDate": "2025-03-18T11:56:19.000Z"
+                    }
+                ],
+                "customfield_10021": null,
+                "customfield_10022": null,
+                "customfield_10023": null,
+                "priority": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/priority/3",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/images/icons/priorities/medium_new.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "customfield_10024": null,
+                "customfield_10025": null,
+                "customfield_10026": "10000_*:*_1_*:*_6820037_*|*_10002_*:*_1_*:*_0",
+                "labels": [],
+                "customfield_10016": null,
+                "customfield_10017": null,
+                "customfield_10018": {
+                    "hasEpicLinkFieldDependency": false,
+                    "showField": false,
+                    "nonEditableReason": {
+                        "reason": "EPIC_LINK_SHOULD_BE_USED",
+                        "message": "To set an epic as the parent, use the epic link instead"
+                    }
+                },
+                "customfield_10019": "0|i00007:",
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "issuelinks": [],
+                "assignee": null,
+                "updated": "2025-03-04T18:20:46.141+0530",
+                "status": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/status/10002",
+                    "description": "",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/",
+                    "name": "Done",
+                    "id": "10002",
+                    "statusCategory": {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/statuscategory/3",
+                        "id": 3,
+                        "key": "done",
+                        "colorName": "green",
+                        "name": "Done"
+                    }
+                },
+                "components": [],
+                "timeoriginalestimate": null,
+                "description": "Scenario: Customer activates debit card via net banking\n  Given a customer with an inactive debit card\n  When they activate the card via net banking\n  Then the card should be activated successfully",
+                "customfield_10010": null,
+                "customfield_10014": null,
+                "customfield_10015": null,
+                "customfield_10005": null,
+                "customfield_10006": null,
+                "security": null,
+                "customfield_10007": null,
+                "customfield_10008": null,
+                "customfield_10009": null,
+                "aggregatetimeestimate": null,
+                "summary": "Validate debit card activation",
+                "creator": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "subtasks": [],
+                "reporter": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "customfield_10000": "{repository={count=1, dataType=repository}, json={\"cachedValue\":{\"errors\":[],\"summary\":{\"repository\":{\"overall\":{\"count\":1,\"lastUpdated\":\"2025-03-04T17:12:19.000+0530\",\"dataType\":\"repository\"},\"byInstanceType\":{\"GitHub\":{\"count\":1,\"name\":\"GitHub\"}}}}},\"isStale\":true}}",
+                "customfield_10001": null,
+                "customfield_10002": [],
+                "customfield_10003": null,
+                "customfield_10004": null,
+                "environment": null,
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "votes": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-2/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                }
+            }
+        },
+        {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,customfield_10010.requestTypePractice,renderedFields",
+            "id": "10000",
+            "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/10000",
+            "key": "SCRUM-1",
+            "fields": {
+                "statuscategorychangedate": "2025-03-04T18:20:16.247+0530",
+                "issuetype": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issuetype/10003",
+                    "id": "10003",
+                    "description": "Created by Jira Agile - do not edit or delete. Issue type for a user story.",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
+                    "name": "Story",
+                    "subtask": false,
+                    "avatarId": 10315,
+                    "entityId": "027bcb6a-6689-4838-9017-d7b7ad13f760",
+                    "hierarchyLevel": 0
+                },
+                "timespent": null,
+                "customfield_10030": null,
+                "project": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "SCRUM",
+                    "name": "AIDevops",
+                    "projectTypeKey": "software",
+                    "simplified": true,
+                    "avatarUrls": {
+                        "48x48": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407",
+                        "24x24": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=small",
+                        "16x16": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=xsmall",
+                        "32x32": "https://shalinithilakan.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10407?size=medium"
+                    }
+                },
+                "customfield_10031": null,
+                "customfield_10032": null,
+                "fixVersions": [
+                    {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/version/10000",
+                        "id": "10000",
+                        "description": "",
+                        "name": "2025.04",
+                        "archived": false,
+                        "released": true,
+                        "releaseDate": "2025-03-07"
+                    }
+                ],
+                "customfield_10034": null,
+                "aggregatetimespent": null,
+                "resolution": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/resolution/10000",
+                    "id": "10000",
+                    "description": "Work has been completed on this issue.",
+                    "name": "Done"
+                },
+                "customfield_10035": null,
+                "customfield_10027": null,
+                "customfield_10028": null,
+                "customfield_10029": null,
+                "resolutiondate": "2025-03-04T18:20:16.226+0530",
+                "workratio": -1,
+                "watches": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-1/watchers",
+                    "watchCount": 1,
+                    "isWatching": true
+                },
+                "lastViewed": "2025-03-04T18:19:55.785+0530",
+                "created": "2025-03-01T14:47:18.984+0530",
+                "customfield_10020": [
+                    {
+                        "id": 1,
+                        "name": "SCRUM Sprint 1",
+                        "state": "active",
+                        "boardId": 1,
+                        "goal": "",
+                        "startDate": "2025-03-04T11:56:28.369Z",
+                        "endDate": "2025-03-18T11:56:19.000Z"
+                    }
+                ],
+                "customfield_10021": null,
+                "customfield_10022": null,
+                "customfield_10023": null,
+                "priority": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/priority/3",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/images/icons/priorities/medium_new.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "customfield_10024": null,
+                "customfield_10025": null,
+                "customfield_10026": "10000_*:*_1_*:*_271977262_*|*_10002_*:*_1_*:*_0",
+                "labels": [],
+                "customfield_10016": null,
+                "customfield_10017": null,
+                "customfield_10018": {
+                    "hasEpicLinkFieldDependency": false,
+                    "showField": false,
+                    "nonEditableReason": {
+                        "reason": "EPIC_LINK_SHOULD_BE_USED",
+                        "message": "To set an epic as the parent, use the epic link instead"
+                    }
+                },
+                "customfield_10019": "0|hzzzzz:",
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "issuelinks": [],
+                "assignee": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "updated": "2025-03-04T18:20:16.246+0530",
+                "status": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/status/10002",
+                    "description": "",
+                    "iconUrl": "https://shalinithilakan.atlassian.net/",
+                    "name": "Done",
+                    "id": "10002",
+                    "statusCategory": {
+                        "self": "https://shalinithilakan.atlassian.net/rest/api/2/statuscategory/3",
+                        "id": 3,
+                        "key": "done",
+                        "colorName": "green",
+                        "name": "Done"
+                    }
+                },
+                "components": [],
+                "timeoriginalestimate": null,
+                "description": "Scenario1: Search for a valid keyword on Google \n\nGiven the user is on the Google homepage \n\nWhen the user searches for \"OpenAI\" \n\nThen search results should contain \"OpenAI\" \n\n\n\nScenario2: Search for a random string that has no results \n\nGiven the user is on the Google homepage \n\nWhen the user searches for \"asdlkfjasdflkjasdf\" \n\nThen no search results should be displayed",
+                "customfield_10010": null,
+                "customfield_10014": null,
+                "customfield_10015": null,
+                "customfield_10005": null,
+                "customfield_10006": null,
+                "security": null,
+                "customfield_10007": null,
+                "customfield_10008": null,
+                "customfield_10009": null,
+                "aggregatetimeestimate": null,
+                "summary": "Validate google search",
+                "creator": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "subtasks": [],
+                "reporter": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/user?accountId=5a522660ebeb8229f4b3117c",
+                    "accountId": "5a522660ebeb8229f4b3117c",
+                    "emailAddress": "shalini.thilakan@gmail.com",
+                    "avatarUrls": {
+                        "48x48": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "24x24": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "16x16": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png",
+                        "32x32": "https://secure.gravatar.com/avatar/998d82a25a2c38983958835a65784222?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FS-3.png"
+                    },
+                    "displayName": "shalini.thilakan@gmail.com",
+                    "active": true,
+                    "timeZone": "Asia/Calcutta",
+                    "accountType": "atlassian"
+                },
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "customfield_10000": "{pullrequest={dataType=pullrequest, state=OPEN, stateCount=1}, json={\"cachedValue\":{\"errors\":[],\"summary\":{\"pullrequest\":{\"overall\":{\"count\":1,\"lastUpdated\":\"2025-03-01T22:28:56.000+0530\",\"stateCount\":1,\"state\":\"OPEN\",\"dataType\":\"pullrequest\",\"open\":true},\"byInstanceType\":{\"GitHub\":{\"count\":1,\"name\":\"GitHub\"}}}}},\"isStale\":true}}",
+                "customfield_10001": null,
+                "customfield_10002": [],
+                "customfield_10003": null,
+                "customfield_10004": null,
+                "environment": null,
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "votes": {
+                    "self": "https://shalinithilakan.atlassian.net/rest/api/2/issue/SCRUM-1/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                }
+            }
+        }
+    ]
+}

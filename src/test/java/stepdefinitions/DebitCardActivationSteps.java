@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class DebitCardSteps {
+public class DebitCardActivationSteps {
     WebDriver driver;
 
     @Given("a customer with an inactive debit card")

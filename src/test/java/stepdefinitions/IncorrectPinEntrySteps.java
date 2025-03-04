@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class PinEntrySteps {
+public class IncorrectPinEntrySteps {
     WebDriver driver;
 
     @Given("a customer with an active debit card")
