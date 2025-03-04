@@ -34,6 +34,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Set API Key as Environment Variable
+        run: echo "DEEPSEEK_API_KEY=${{ secrets.DEEPSEEK_API_KEY }}" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: |
           pip install requests
