@@ -4,6 +4,8 @@ import sys
 with open(sys.argv[1], "r") as f:
     jira_issues = json.load(f)
 
+#jira_issues=json.load(sys.argv[1])
+
 acceptance_criteria = {}
 
 for issue in jira_issues:
@@ -18,3 +20,4 @@ with open("criteria.json", "w") as f:
     json.dump(acceptance_criteria, f, indent=4)
 
 print(f"Extracted acceptance criteria for {len(acceptance_criteria)} issues.")
+sys.stdout.flush()
