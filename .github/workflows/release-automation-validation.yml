@@ -1,97 +1,97 @@
-name: Validate JIRA Automation Coverage
+# name: Validate JIRA Automation Coverage
 
-on:
-  workflow_dispatch:
-    inputs:
-      fix_version_link:
-        description: 'JIRA Fix Version Link'
-        required: true
-        type: string
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       fix_version_link:
+#         description: 'JIRA Fix Version Link'
+#         required: true
+#         type: string
 
-jobs:
-  validate_tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Free up disk space
-        run: |
-          sudo apt-get clean
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /usr/local/share/boost
-          sudo rm -rf ~/.cache
-          df -h
+# jobs:
+#   validate_tests:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Free up disk space
+#         run: |
+#           sudo apt-get clean
+#           sudo rm -rf /usr/local/lib/android
+#           sudo rm -rf /opt/ghc
+#           sudo rm -rf /usr/share/dotnet
+#           sudo rm -rf /usr/local/share/boost
+#           sudo rm -rf ~/.cache
+#           df -h
 
-      - name: Checkout code
-        uses: actions/checkout@v3
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+#       - name: Set up JDK
+#         uses: actions/setup-java@v3
+#         with:
+#           distribution: 'temurin'
+#           java-version: '17'
 
-      - name: Install dependencies
-        run: |
-          pip install requests
-          pip install jira  # JIRA Python library
-          pip install 'accelerate>=0.26.0'
-          pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-          pip install transformers huggingface_hub
+#       - name: Install dependencies
+#         run: |
+#           pip install requests
+#           pip install jira  # JIRA Python library
+#           pip install 'accelerate>=0.26.0'
+#           pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+#           pip install transformers huggingface_hub
 
-      - name: Authenticate with Hugging Face
-        run: |
-          huggingface-cli login --token ${{ secrets.HF_TOKEN }}
+#       - name: Authenticate with Hugging Face
+#         run: |
+#           huggingface-cli login --token ${{ secrets.HF_TOKEN }}
 
-      - name: Extract JIRA issues for Fix Version
-        id: get_jira_issues
-        env:
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          JIRA_BASE_URL: "https://shalinithilakan.atlassian.net"
-        run: |
-          python scripts/get_jira_issues.py "${{ github.event.inputs.fix_version_link }}" > jira_issues.json
+#       - name: Extract JIRA issues for Fix Version
+#         id: get_jira_issues
+#         env:
+#           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+#           JIRA_BASE_URL: "https://shalinithilakan.atlassian.net"
+#         run: |
+#           python scripts/get_jira_issues.py "${{ github.event.inputs.fix_version_link }}" > jira_issues.json
 
-      - name: Extract acceptance criteria
-        id: extract_criteria
-        run: |
-          python scripts/extract_acceptance_criteria.py jira_issues.json > criteria.json
+#       - name: Extract acceptance criteria
+#         id: extract_criteria
+#         run: |
+#           python scripts/extract_acceptance_criteria.py jira_issues.json > criteria.json
 
-      - name: Search for Feature Files and Step Definitions
-        id: fetch_tests
-        run: |
-          FEATURE_FILES=$(find ./src/test/resources/features -name "*.feature")
-          STEP_DEF_FILES=$(find ./src/test/java/stepdefinitions -name "*.java")
+#       - name: Search for Feature Files and Step Definitions
+#         id: fetch_tests
+#         run: |
+#           FEATURE_FILES=$(find ./src/test/resources/features -name "*.feature")
+#           STEP_DEF_FILES=$(find ./src/test/java/stepdefinitions -name "*.java")
 
-          if [[ -z "$FEATURE_FILES" || -z "$STEP_DEF_FILES" ]]; then
-            echo "❌ No test automation files found."
-            exit 1
-          fi
+#           if [[ -z "$FEATURE_FILES" || -z "$STEP_DEF_FILES" ]]; then
+#             echo "❌ No test automation files found."
+#             exit 1
+#           fi
 
-          echo "✅ Found Feature Files:"
-          echo "$FEATURE_FILES"
-          echo "✅ Found Step Definitions:"
-          echo "$STEP_DEF_FILES"
+#           echo "✅ Found Feature Files:"
+#           echo "$FEATURE_FILES"
+#           echo "✅ Found Step Definitions:"
+#           echo "$STEP_DEF_FILES"
 
-          # Store multi-line values correctly in GitHub environment
-          {
-            echo "FEATURE_FILES<<EOF"
-            echo "$FEATURE_FILES"
-            echo "EOF"
-          } >> "$GITHUB_ENV"
+#           # Store multi-line values correctly in GitHub environment
+#           {
+#             echo "FEATURE_FILES<<EOF"
+#             echo "$FEATURE_FILES"
+#             echo "EOF"
+#           } >> "$GITHUB_ENV"
 
-          {
-            echo "STEP_DEF_FILES<<EOF"
-            echo "$STEP_DEF_FILES"
-            echo "EOF"
-          } >> "$GITHUB_ENV"
+#           {
+#             echo "STEP_DEF_FILES<<EOF"
+#             echo "$STEP_DEF_FILES"
+#             echo "EOF"
+#           } >> "$GITHUB_ENV"
 
-      - name: Verify automation coverage
-        id: check_coverage
-        run: |
-          python scripts/validate_coverage.py criteria.json "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}" > coverage_report.json
+#       - name: Verify automation coverage
+#         id: check_coverage
+#         run: |
+#           python scripts/validate_coverage.py criteria.json "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}" > coverage_report.json
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: coverage_report.json
+#       - name: Upload coverage report
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: coverage-report
+#           path: coverage_report.json
