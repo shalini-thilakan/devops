@@ -176,5 +176,6 @@ jobs:
       - name: Verify automation coverage
         id: check_coverage
         run: |
-          python scripts/validate_coverage_DS.py criteria.json "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}" > coverage_report.json
+          python scripts/validate_coverage_DS.py criteria.json "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}" > coverage_report.txt
+          cat coverage_report.txt
 
