@@ -1,0 +1,45 @@
+name: Validate JIRA Automation Coverage
+
+on:
+  workflow_dispatch:
+    inputs:
+      fix_version_link:
+        description: 'JIRA Fix Version Link'
+        required: true
+        type: string
+
+jobs:
+  validate_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+          pip install jira  # JIRA Python library
+
+      - name: Extract JIRA issues for Fix Version
+        id: get_jira_issues
+        env:
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          JIRA_BASE_URL: "https://your-jira-instance.atlassian.net"
+        run: |
+          python scripts/get_jira_issues.py "${{ github.event.inputs.fix_version_link }}" > jira_issues.json
+
+      - name: Extract acceptance criteria
+        id: extract_criteria
+        run: |
+          python scripts/extract_acceptance_criteria.py jira_issues.json > criteria.json
+
+      - name: Verify automation coverage
+        id: check_coverage
+        run: |
+          python scripts/validate_coverage.py criteria.json src/test/resources/features > coverage_report.json
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage_report.json
