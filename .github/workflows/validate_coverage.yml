@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       fix_version_link:
-        description: 'JIRA Fix Version Link'
+        description: 'JIRA Fix Version ID'
         required: true
         type: string
   # push:
