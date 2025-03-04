@@ -108,8 +108,3 @@ jobs:
         run: |
           python scripts/validate_coverage_DS.py "${{ env.FEATURE_FILES }}" "${{ env.STEP_DEF_FILES }}" > coverage_report.json
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: coverage_report.json
