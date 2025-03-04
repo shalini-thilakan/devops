@@ -72,7 +72,7 @@ jobs:
         id: extract_criteria
         run: |
           # python scripts/extract_acceptance_criteria.py > criteria.json
-          #python scripts/extract_acceptance_criteria.py jira_issues.json > criteria.json         
+          python scripts/extract_acceptance_criteria.py jira_issues.json > criteria.json         
 
       - name: Search for Feature Files and Step Definitions
         id: fetch_tests
