@@ -1,15 +1,15 @@
 name: Validate JIRA Automation Coverage
 
 on:
-  push:
-    branches:
-      - '**'   # Triggers on any branch
   workflow_dispatch:
     inputs:
       fix_version_link:
         description: 'JIRA Fix Version Link'
         required: true
         type: string
+  push:
+    branches:
+      - '**'   # Triggers on any branch
 
 jobs:
   validate_tests:
