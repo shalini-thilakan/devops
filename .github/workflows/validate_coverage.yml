@@ -38,7 +38,7 @@ jobs:
         run: |
           pip install requests
           pip install jira  # JIRA Python library
-          pip install openai
+          pip install --upgrade openai
 
       - name: Extract JIRA issues for Fix Version
         id: get_jira_issues
@@ -48,7 +48,8 @@ jobs:
         run: |
           JIRA_API_URL="https://shalinithilakan.atlassian.net/rest/api/2/search?jql=fixVersion=${{ github.event.inputs.fix_version_link }}"
           RESPONSE=$(curl -u "${{ secrets.JIRA_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" -X GET -H "Content-Type: application/json" "$JIRA_API_URL")
-          ISSUES=$(echo "$RESPONSE" | jq -r '.issues' | tr '\n' ' ' | sed 's/"/\\"/g') 
+          # ISSUES=$(echo "$RESPONSE" | jq -r '.issues' | tr '\n' ' ' | sed 's/"/\\"/g') 
+          ISSUES=$(echo "$RESPONSE" | jq -r '.issues') 
 
           #ISSUES=$(echo "$RESPONSE" | tr '\n' ' ' | sed 's/"/\\"/g') 
 
@@ -60,12 +61,17 @@ jobs:
           echo "✅ Fetched Issues"
           echo "$ISSUES"
 
-          AC=$(echo "$ISSUES" | jq -c 'reduce .[] as $item ({}; .[$item.key] = $item.fields.description)')
+          JSON_LIST=$(echo "$ISSUES" | jq -c '[.[] | .id]')
+          echo "✅ Fetched ISSUE List"
+          echo "$JSON_LIST"
 
-          echo "✅ Fetched Acceptance Criteria"
-          echo "$AC"
+          echo "ISSUE_LIST=$JSON_LIST" >> $GITHUB_ENV
 
-          echo $AC > criteria.json
+          #AC=$(echo "$ISSUES" | jq -c 'reduce .[] as $item ({}; .[$item.key] = $item.fields.description)')
+
+          
+
+          #echo "$AC" > criteria.json
           
           # # Save the full JSON response to a file
           #echo "$ISSUES" > jira_issues.json
@@ -74,6 +80,60 @@ jobs:
           # echo "ISSUES<<EOF" >> $GITHUB_ENV
           # echo "$ISSUES" >> $GITHUB_ENV
           # echo "EOF" >> $GITHUB_ENV
+
+      - name: Fetch JIRA Acceptance Criteria
+        id: fetch_jira
+        run: |
+          AC_LIST='[]'
+          for issue in $(echo "$ISSUE_LIST" | jq -r '.[]'); do
+            echo "Fetching JIRA issue: $issue"
+
+            JIRA_API_URL="https://shalinithilakan.atlassian.net/rest/api/3/issue/$issue"
+            RESPONSE=$(curl -u "${{ secrets.JIRA_EMAIL }}:${{ secrets.JIRA_API_TOKEN }}" -X GET -H "Content-Type: application/json" "$JIRA_API_URL")
+            #ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.description.content') # Replace with actual field ID
+            # Extract acceptance criteria safely
+            ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -c '.fields.description.content // ""') # Replace with actual field ID
+
+            # Extract & Decode JSON-Stringified Acceptance Criteria
+            #ACCEPTANCE_CRITERIA=$(echo "$RESPONSE" | jq -r '.fields.description.content // ""' | jq -c 'fromjson')
+
+            # # Append to JSON list
+            #AC_LIST=$(echo "$AC_LIST" | jq --arg desc "$ACCEPTANCE_CRITERIA" '. + [$desc]')
+
+            # Append to JSON array
+            AC_LIST=$(echo "$AC_LIST" | jq --argjson desc "$ACCEPTANCE_CRITERIA" '. + [$desc]')
+          done
+
+          echo "✅ Fetched Acceptance Criteria."
+          echo "$AC_LIST"
+
+          # Ensure JSON is correctly formatted
+          echo "$AC_LIST" | jq '.' > criteria.json
+
+          # Flatten the nested lists and extract only "text" values
+          # PLAIN_JSON_LIST=$(jq '[.[]
+          #   | .[]
+          #   | .content[]
+          #   | select(.text != null)
+          #   | .text
+          # ]' $AC_LIST)
+
+          # echo "Final JSON List: $PLAIN_JSON_LIST"
+          # echo "CRITERIA=$PLAIN_JSON_LIST" >> $GITHUB_ENV
+
+          # CRITERIA='[]'
+          # for ac in $(echo "$AC_LIST" | jq -r '.[]'); do
+          #   # Extract all "text" values from "content" and join them into a single string
+          #   TEXT_STRING=$(echo "$ac" | jq -r '[.[] | .content[]? | .text] | join(" ")')
+            
+          #   # Append to JSON list
+          #   CRITERIA=$(echo "$CRITERIA" | jq --argjson desc "$TEXT_STRING" '. + [$desc]')
+          # done
+
+          # echo "✅ Extracted Acceptance Criteria."
+          # echo "$CRITERIA"
+
+          # echo "$CRITERIA" | jq '.' > criteria.json
 
       # - name: Extract acceptance criteria
       #   id: extract_criteria

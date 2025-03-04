@@ -13,6 +13,8 @@ MODEL = "deepseek-ai/deepseek-coder-1.3b-instruct"
 openai.api_base = "https://openrouter.ai/api/v1"
 openai.api_key = OPENROUTER_API_KEY
 
+client = openai.OpenAI(api_key=OPENROUTER_API_KEY, base_url="https://api.deepseek.com") 
+
 with open(sys.argv[1], "r") as f:
     acceptance_criteria = json.load(f)
 
@@ -37,7 +39,7 @@ print("Model loaded successfully!")
 #     coverage_report[jira_key] = search_criteria_in_features(criteria)
 
 def analyze_bdd_coverage(acceptance_criteria, feature_text, step_def_text):
-    openai_client = openai.OpenAI(api_key=openai.api_key) 
+    #client = OpenAI(api_key=OPENROUTER_API_KEY)
     validation_prompt = f"""
     Given the following acceptance criteria in JSON format, verify if they are fully covered in the provided BDD automation scripts. 
 
@@ -56,7 +58,7 @@ def analyze_bdd_coverage(acceptance_criteria, feature_text, step_def_text):
     3. Suggestions for improving test coverage.
     """
 
-    response = openai_client.chat.completions.create(
+    response = client.chat.completions.create(
         model=MODEL,
         messages=[{"role": "user", "content": validation_prompt}],
         max_tokens=1000
